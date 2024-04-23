@@ -10,12 +10,11 @@ plugins {
 val nabtoWrapperVersion = "2.4.0"
 
 android {
-    compileSdk = 33
+    compileSdk = 34
     namespace = "com.nabto.edge.sharedcode"
 
     defaultConfig {
         minSdk = 26
-        targetSdk = 33
         buildConfigField("String", "NABTO_WRAPPER_VERSION", "\"${nabtoWrapperVersion}\"")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -51,18 +50,18 @@ android {
 
 dependencies {
     // Android dependencies
-    api ("androidx.core:core-ktx:1.9.0")
-    api ("androidx.appcompat:appcompat:1.5.1")
-    api ("com.google.android.material:material:1.7.0")
-    api ("androidx.constraintlayout:constraintlayout:2.1.4")
-    api ("androidx.navigation:navigation-fragment-ktx:2.5.3")
-    api ("androidx.navigation:navigation-ui-ktx:2.5.3")
-    api ("androidx.navigation:navigation-dynamic-features-fragment:2.5.3")
-    api ("androidx.legacy:legacy-support-v4:1.0.0")
-    api ("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
-    api ("androidx.lifecycle:lifecycle-livedata-ktx:2.5.1")
-    api ("com.google.android.gms:play-services-vision:20.1.3")
-    api ("androidx.preference:preference-ktx:1.2.0")
+    api (libs.androidx.core.ktx)
+    api (libs.androidx.appcompat)
+    api (libs.material)
+    api (libs.androidx.constraintlayout)
+    api (libs.androidx.navigation.fragment.ktx)
+    api (libs.androidx.navigation.ui.ktx)
+    api (libs.androidx.navigation.dynamic.features.fragment)
+    api (libs.androidx.legacy.support.v4)
+    api (libs.androidx.lifecycle.runtime.ktx)
+    api (libs.androidx.lifecycle.livedata.ktx)
+    api (libs.play.services.vision)
+    api (libs.androidx.preference.ktx)
 
     // Nabto dependencies
     api ("com.nabto.edge.client:library:$nabtoWrapperVersion")
@@ -71,29 +70,27 @@ dependencies {
     api ("com.nabto.edge.client:iam-util-ktx:$nabtoWrapperVersion")
 
     // Kotlin dependencies
-    api ("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2")
-    api ("org.jetbrains.kotlinx:kotlinx-serialization-cbor:1.3.2")
-    api ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
-    api ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
-    api ("androidx.annotation:annotation:1.4.0")
-    api ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
-    api ("androidx.lifecycle:lifecycle-process:2.5.1")
+    api (libs.kotlinx.serialization.json)
+    api (libs.kotlinx.serialization.cbor)
+    api (libs.kotlinx.coroutines.core)
+    api (libs.kotlinx.coroutines.android)
+    api (libs.androidx.annotation)
+    api (libs.androidx.lifecycle.viewmodel.ktx)
+    api (libs.androidx.lifecycle.process)
 
     // Room persistence library to use a database abstracted over sqlite
-    val roomVersion = "2.4.2"
-    api ("androidx.room:room-runtime:$roomVersion")
-    kapt ("androidx.room:room-compiler:$roomVersion")
-    api ("androidx.room:room-ktx:$roomVersion")
+    api (libs.androidx.room.runtime)
+    kapt (libs.androidx.room.compiler)
+    api (libs.androidx.room.ktx)
 
     // Koin dependency injection
-    val koinVersion = "3.2.0"
-    api ("io.insert-koin:koin-core:$koinVersion")
-    api ("io.insert-koin:koin-android:$koinVersion")
-    api ("io.insert-koin:koin-androidx-workmanager:$koinVersion")
-    api ("io.insert-koin:koin-androidx-navigation:$koinVersion")
-    testImplementation ("io.insert-koin:koin-test:$koinVersion")
+    api (libs.koin.core)
+    api (libs.koin.android)
+    api (libs.koin.androidx.workmanager)
+    api (libs.koin.androidx.navigation)
+    testImplementation (libs.koin.test)
 
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
 }

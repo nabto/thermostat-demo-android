@@ -39,8 +39,8 @@ open class NabtoAndroidApplication : Application() {
     private val scanner: NabtoDeviceScanner by lazy { NabtoDeviceScanner(nabtoClient) }
     private val applicationScope = CoroutineScope(SupervisorJob())
 
-    fun initializeNabtoApplication(config: NabtoConfiguration) {
-        SetNabtoConfiguration(config)
+    override fun onCreate() {
+        super.onCreate()
         val connectivityManager = applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         startKoin {
             androidLogger()

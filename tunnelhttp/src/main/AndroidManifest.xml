@@ -10,7 +10,7 @@
     so that plain HTTP traffic can be tested against.
      -->
     <application
-        android:name=".TunnelHTTPApplication"
+        android:name="com.nabto.edge.sharedcode.NabtoAndroidApplication"
         android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"

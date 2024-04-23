@@ -210,13 +210,6 @@ class DevicePageViewModel(
                     return@launch
                 }
 
-                val details = iam.getDeviceDetails(connectionManager.getConnection(handle))
-                if (details.appName != NabtoConfig.DEVICE_APP_NAME) {
-                    Log.i(TAG, "The app name of the connected device is ${details.appName} instead of ${NabtoConfig.DEVICE_APP_NAME}!")
-                    _connEvent.postEvent(AppConnectionEvent.FAILED_INCORRECT_APP)
-                    return@launch
-                }
-
                 updateDeviceState()
 
                 if (_connState.value == AppConnectionState.DISCONNECTED) {

@@ -16,9 +16,9 @@ class AppSettingsFragment : PreferenceFragmentCompat() {
     private val database: DeviceDatabase by inject()
     private val manager: NabtoConnectionManager by inject()
 
-    private val displayNameKey = internalConfig.DISPLAY_NAME_PREF
-    private val resetDatabaseKey = "preferences_reset_database"
-    private val resetPrivateKeyKey = "preferences_reset_private_key"
+    private val displayNameKey = PreferenceKeys.displayName
+    private val resetDatabaseKey = PreferenceKeys.resetDatabase
+    private val resetPrivateKeyKey = PreferenceKeys.resetPrivateKey
 
     private fun getAppVersion(): String {
         val manager = activity?.packageManager

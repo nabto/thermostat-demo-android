@@ -20,29 +20,6 @@ implementation project([path: ":sharedcode"])
 implementation(project(mapOf("path" to ":sharedcode")))
 ```
 
-## Application class
-Now we create the Application class. You may want to read more about the Application class on the [Android documentation](https://developer.android.com/reference/android/app/Application). Right click on your module in Android Studio and press `New > New Kotlin File`, name it `MyApplication.kt` or similar. The name in this case does not actually matter. The class within the file may then look like this (in Kotlin)
-
-```kt
-import com.nabto.edge.sharedcode.NabtoAndroidApplication
-import com.nabto.edge.sharedcode.NabtoConfiguration
-
-class MyApplication : NabtoAndroidApplication() {
-    override fun onCreate() {
-        super.onCreate()
-        initializeNabtoApplication(NabtoConfiguration(
-            DEVICE_APP_NAME = "my_app",
-            MDNS_SUB_TYPE = "mysubtype",
-            PRIVATE_KEY_PREF = "client_private_key",
-            DISPLAY_NAME_PREF = "nabto_display_name",
-            SERVER_KEY = "sk-d8254c6f790001003d0c842d1b63b134"
-        ))
-    }
-}
-```
-
-@TODO: Explain what these tags do.
-
 ## AndroidManifest.xml
 Now we will edit the Android manifest file to give permissions for mDNS and internet connection, and we will also add the activity from the sharedcode module here. Your `AndroidManifest.xml` file should be in `src/main/AndroidManifest.xml` in your module's folder.
 
@@ -53,11 +30,10 @@ Add the following permissions
     <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
 ```
 
-On the `application` tag, add a key that references your Application class created in the last step.
+On the `application` tag, add a key that references the sharedcode's NabtoAndroidApplication class
 ```xml
     <application
-        android:name="com.example.myapplication.MyApplication"
-        ...>
+        android:name="com.nabto.edge.sharedcode.NabtoAndroidApplication">
     </application>
 ```
 
@@ -83,7 +59,7 @@ All in all, your AndroidManifest.xml file may look as follows
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
     <application
-        android:name="com.example.myapplication.MyApplication"
+        android:name="com.nabto.edge.sharedcode.NabtoAndroidApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"

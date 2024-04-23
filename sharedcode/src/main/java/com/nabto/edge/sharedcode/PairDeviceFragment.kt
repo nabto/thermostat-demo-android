@@ -169,10 +169,6 @@ private class PairDeviceViewModel(
         viewModelScope.launch {
             try {
                 val pairingDetails = getPairingDetails()
-                if (pairingDetails.appName != internalConfig.DEVICE_APP_NAME) {
-                    _pairingResult.postValue(PairingResult.FailedIncorrectApp)
-                    return@launch
-                }
 
                 if (isCurrentUserPaired()) {
                     val dev = getDeviceDetails(friendlyName)
@@ -384,7 +380,9 @@ class PairDeviceFragment : Fragment() {
             view.snack(snack)
             when (result) {
                 is PairingResult.Success -> {
-                    findNavController().navigateAndPopUpToRoute(AppRoute.home(), true)
+                    findNavController().navigate(AppRoute.home()) {
+                        popUpTo(AppRoute.home())
+                    }
                 }
                 is PairingResult.FailedUsernameExists -> { button.isEnabled = true }
                 else -> { findNavController().popBackStack() }

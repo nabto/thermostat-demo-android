@@ -9,7 +9,7 @@ import com.nabto.edge.client.NabtoClient
 class NabtoDeviceScanner(nabtoClient: NabtoClient) {
     private val deviceMap = HashMap<String, Device>()
     private val _devices: MutableLiveData<List<Device>> = MutableLiveData()
-    private val scanner: MdnsScanner = nabtoClient.createMdnsScanner(internalConfig.MDNS_SUB_TYPE)
+    private val scanner: MdnsScanner = nabtoClient.createMdnsScanner()
     val devices: LiveData<List<Device>>
         get() = _devices
 

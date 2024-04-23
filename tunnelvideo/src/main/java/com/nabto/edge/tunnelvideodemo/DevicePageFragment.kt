@@ -170,13 +170,6 @@ class DevicePageViewModel(
                     return@launch
                 }
 
-                val details = iam.getDeviceDetails(connectionManager.getConnection(handle))
-                if (details.appName != NabtoConfig.DEVICE_APP_NAME) {
-                    Log.i(TAG, "The app name of the connected device is ${details.appName} instead of ${NabtoConfig.DEVICE_APP_NAME}!")
-                    _connEvent.postEvent(AppConnectionEvent.FAILED_INCORRECT_APP)
-                    return@launch
-                }
-
                 if (_connState.value == AppConnectionState.DISCONNECTED) {
                     _connEvent.postEvent(AppConnectionEvent.RECONNECTED)
                 }
@@ -289,7 +282,7 @@ class DevicePageViewModel(
 
                     val payload = Cbor.decodeFromByteArray<ServiceInfo>(coap.responsePayload)
 
-                    val ep = customEndpoint.ifEmpty { payload.metadata.getOrDefault("rtsp-path", NabtoConfig.RTSP_ENDPOINT) }
+                    val ep = customEndpoint.ifEmpty { payload.metadata.getOrDefault("rtsp-path", "/video") }
                     val username = payload.metadata.getOrDefault("rtsp-username", "")
                     val password = payload.metadata.getOrDefault("rtsp-password", "")
                     val auth = if (username.isEmpty()) "" else "${username}:${password}@"

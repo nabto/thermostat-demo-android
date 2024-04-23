@@ -171,7 +171,6 @@ class NabtoConnectionManagerImpl(
     data class ConnectionOptions(
         @Required var ProductId: String,
         @Required var DeviceId: String,
-        @Required var ServerKey: String,
         @Required var PrivateKey: String,
         @Required var ServerConnectToken: String,
         var KeepAliveInterval: Int,
@@ -319,7 +318,6 @@ class NabtoConnectionManagerImpl(
         val options = ConnectionOptions(
             ProductId = device.productId,
             DeviceId = device.deviceId,
-            ServerKey = internalConfig.SERVER_KEY,
             PrivateKey = repo.getClientPrivateKey(),
             ServerConnectToken = device.SCT,
             KeepAliveInterval = 2000,

@@ -65,7 +65,7 @@ class NabtoRepositoryImpl(
     init {
         run {
             // Store a client private key to be used for connections.
-            val key = internalConfig.PRIVATE_KEY_PREF
+            val key = PreferenceKeys.clientPrivateKey
             if (!pref.contains(key)) {
                 val pk = nabtoClient.createPrivateKey()
                 with(pref.edit()) {
@@ -77,7 +77,7 @@ class NabtoRepositoryImpl(
 
 
         run {
-            val key = internalConfig.DISPLAY_NAME_PREF
+            val key = PreferenceKeys.displayName
             if (!pref.contains(key)) {
                 val name = if (Build.VERSION.SDK_INT <= 31) {
                     Settings.Secure.getString(context.contentResolver, "bluetooth_name")
@@ -97,7 +97,7 @@ class NabtoRepositoryImpl(
     }
 
     override fun getClientPrivateKey(): String {
-        val key = internalConfig.PRIVATE_KEY_PREF
+        val key = PreferenceKeys.clientPrivateKey
         if (pref.contains(key)) {
             return pref.getString(key, null)!!
         } else {
@@ -107,7 +107,7 @@ class NabtoRepositoryImpl(
     }
 
     override fun resetClientPrivateKey() {
-        val key = internalConfig.PRIVATE_KEY_PREF
+        val key = PreferenceKeys.clientPrivateKey
         val pk = nabtoClient.createPrivateKey()
         with(pref.edit()) {
             putString(key, pk)
@@ -126,7 +126,7 @@ class NabtoRepositoryImpl(
 
     override fun setDisplayName(displayName: String) {
         _displayName.postValue(displayName)
-        val key = internalConfig.DISPLAY_NAME_PREF
+        val key = PreferenceKeys.displayName
         with(pref.edit()) {
             putString(key, displayName)
             apply()
